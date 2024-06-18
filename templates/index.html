@@ -1,0 +1,34 @@
+{% extends "default.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Clicker{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>{% if name %}{{ name }}{% else %}NULL {% endif %}</h1>
+    <h1>{% if nclicks %}{{ nclicks }}{% else %}NULL {% endif %}</h1>
+
+    <div class="clicky"></div>
+    <button onclick="increment('{{name}}', '{{nclicks}}', 'increment')"><img
+            src="{{ url_for('static', filename='images/clicky.png') }}" class="image" /></button>
+    </div>
+<div class=row>
+    <div class="col-md-6">
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+<h1>Users</h1>
+<table border=1>
+    <thead>
+        <td><b>Username</b></td>
+        <td><b>Clicks</b></td>
+    </thead>
+
+    {% for row in data %}
+    <tr>
+        <td>{{row["username"]}}</td>
+        <td>{{row["clicks"]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
